@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace GigHub.Controllers
 {
@@ -22,9 +18,30 @@ namespace GigHub.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Msg = "Having Trouble? Send us a message.";
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Contact(string message)
+        {
+            // TODO: Send message to HQ
+            ViewBag.Msg = "Message sent. Thanks!";
+
+            return View();
+        }
+
+        public ActionResult Serial(string letterCase)
+        {
+            var serial = "TESTINGSERIAL20950";
+            if (letterCase == "lower")
+            {
+                return Content(serial.ToLower());
+            }
+            //return Content(serial);
+            return Json(new { name = "Serial", value = serial },
+                JsonRequestBehavior.AllowGet);
         }
     }
 }
